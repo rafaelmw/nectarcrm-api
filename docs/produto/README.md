@@ -36,6 +36,8 @@ subcategoria | (object) | SubCategoria do produto
 valorBase | (float) | Valor base do produto
 valorEditavel | (boolean) | Indica se o valor base do produto é ou não editável
 fracionario | (boolean) | Indica se o produto permite quantidade fracionada
+itensDeCusto | (array)(ItemFormacaoPreco) | Lista de formações de preço do produto(torna a precificação do produto como composto)
+faixasPreco | (array)(FaixaPreco) | Lista de faixas de preço do produto(torna a precificação do produto como faixa de preço)
 
 Exemplo
 ```js
@@ -64,7 +66,7 @@ Exemplo
           "id": 2,
           "nome": "Manutenção"
         },
-        "valorBase": 150,
+        "valorBase": 150, //caso precificação simples
         "fracionario": false,
         "produtos": [
             {
@@ -84,7 +86,31 @@ Exemplo
                 "isDescontoPorcentual": true
             }
         ],
-        "editarProdutosDependentes": false
+        "editarProdutosDependentes": false,
+        itensDeCusto:[//somente se precificaçao for composta
+            {
+                "id":2,
+                "nome": "Custo 1"//necessario somente quando o item de custo nao existir(será criado)
+                "valor" : 100.00,
+                "quantidade" : 3,
+                "valorBase" : 100.00,//necessario somente quando o item de custo nao existir(será criado)
+                "porcentagem" : false,//necessario somente quando o item de custo nao existir(será criado)
+                "multiplicador" : false//necessario somente quando o item de custo nao existir(será criado)
+            }
+        ]
+        faixasPreco:[//somente se precificaçao for por faixas de preço
+            {
+                "quantidadeInicial" : 1,
+                "quantidadeInicial" : 10,
+                "valor" : 100.00
+            },
+            {
+                "quantidadeInicial" : 11,
+                "quantidadeInicial" : 20,
+                "valor" : 90.00
+            }
+        ]
+        
       }
   ]
 ```
